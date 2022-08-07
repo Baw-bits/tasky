@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tasky/controller/data_controller.dart';
 import 'package:tasky/screens/add_task.dart';
 import 'package:tasky/screens/all_task.dart';
 import 'package:tasky/screens/home_screen.dart';
@@ -11,9 +12,14 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+  loadData() async {
+    await Get.find<DataController>().getData();
+  }
+
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut(() => DataController());
+    loadData();
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Tasky',

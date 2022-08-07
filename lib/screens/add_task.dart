@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tasky/controller/data_controller.dart';
+import 'package:tasky/screens/all_task.dart';
 import 'package:tasky/utils/colors/app_colors.dart';
 import 'package:tasky/widgets/button_widget.dart';
+import 'package:tasky/widgets/error_warning_ms.dart';
 import 'package:tasky/widgets/textfield_widget.dart';
 import 'package:get/get.dart';
 
@@ -12,6 +15,25 @@ class AddTask extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController nameController = TextEditingController();
     TextEditingController detailController = TextEditingController();
+    bool _dataValidation() {
+      if (nameController.text.trim() == '') {
+        Message.taskErrorOrWarning('Task name', 'Your task name is empty');
+        return false;
+      } else if (detailController.text.trim() == '') {
+        Message.taskErrorOrWarning('Task detail', 'Your task detail is empty');
+        return false;
+      } else if (nameController.text.length <= 10) {
+        Message.taskErrorOrWarning(
+            'Task Name', 'Your task name should be at least 10 characters');
+        return false;
+      } else if (detailController.text.length <= 20) {
+        Message.taskErrorOrWarning('Task details',
+            'Your task details should be at least 20 characters');
+        return false;
+      }
+      return true;
+    }
+
     return Scaffold(
       body: Container(
         height: double.maxFinite,
@@ -59,10 +81,21 @@ class AddTask extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                ButtonWidget(
-                    textColor: Colors.white,
-                    backgroundColor: AppColors.mainColor,
-                    text: 'Add')
+                GestureDetector(
+                  onTap: () {
+                    if (_dataValidation()) {
+                      Get.find<DataController>().postData(
+                          nameController.text.trim(),
+                          detailController.text.trim());
+                      Get.to(() => AllTask(),
+                          transition: Transition.circularReveal);
+                    }
+                  },
+                  child: ButtonWidget(
+                      textColor: Colors.white,
+                      backgroundColor: AppColors.mainColor,
+                      text: 'Add'),
+                )
               ],
             ),
             SizedBox(
