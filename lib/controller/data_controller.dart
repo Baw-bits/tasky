@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:tasky/services/services.dart';
 import 'package:tasky/utils/app_constants.dart';
@@ -8,6 +11,8 @@ class DataController extends GetxController {
   bool get isLoading => _isLoading;
   List<dynamic> _myData = [];
   List<dynamic> get myData => _myData;
+  Map<String, dynamic> _singleData = {};
+  Map<String, dynamic> get singleData => _singleData;
   Future<void> getData() async {
     _isLoading = true;
     Response response = await service.getData(AppConstants.GET_TASKS);
@@ -20,10 +25,14 @@ class DataController extends GetxController {
     }
   }
 
-  Future<void> getSingleData() async {
+  Future<void> getSingleData(String id) async {
     _isLoading = true;
-    Response response = await service.getData(AppConstants.GET_TASK);
+    Response response = await service.getData('${AppConstants.GET_TASK}' '$id');
     if (response.statusCode == 200) {
+      if (kDebugMode) {
+        print('we got the single data' + jsonEncode(response.body));
+        _singleData = response.body;
+      }
       update();
     } else {
       print('he no work');

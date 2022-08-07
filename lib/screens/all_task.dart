@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tasky/controller/data_controller.dart';
+import 'package:tasky/screens/edit_task.dart';
+import 'package:tasky/screens/view_task.dart';
 import 'package:tasky/utils/colors/app_colors.dart';
 import 'package:tasky/widgets/button_widget.dart';
 import 'package:tasky/widgets/task_widgets.dart';
@@ -128,19 +130,35 @@ class AllTask extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        ButtonWidget(
-                                            textColor: Colors.white,
-                                            backgroundColor:
-                                                AppColors.mainColor,
-                                            text: 'View'),
+                                        GestureDetector(
+                                          onTap: () {
+                                            Get.off(() => ViewTask(
+                                                id: int.parse(controller
+                                                    .myData[index]['id']
+                                                    .toString())));
+                                          },
+                                          child: ButtonWidget(
+                                              textColor: Colors.white,
+                                              backgroundColor:
+                                                  AppColors.mainColor,
+                                              text: 'View'),
+                                        ),
                                         SizedBox(
                                           height: 20,
                                         ),
-                                        ButtonWidget(
-                                            textColor: Colors.white,
-                                            backgroundColor:
-                                                AppColors.mainColor,
-                                            text: 'Edit'),
+                                        GestureDetector(
+                                          onTap: () {
+                                            Get.off(() => EditTask(
+                                                id: int.parse(controller
+                                                    .myData[index]['id']
+                                                    .toString())));
+                                          },
+                                          child: ButtonWidget(
+                                              textColor: Colors.white,
+                                              backgroundColor:
+                                                  AppColors.mainColor,
+                                              text: 'Edit'),
+                                        ),
                                       ],
                                     ),
                                   ),
