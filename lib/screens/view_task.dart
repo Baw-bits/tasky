@@ -21,6 +21,10 @@ class ViewTask extends StatelessWidget {
     TextEditingController detailController = TextEditingController();
     return Scaffold(body: GetBuilder<DataController>(
       builder: ((controller) {
+        nameController.text =
+            controller.singleData['task_name'] ?? "task name not found";
+        detailController.text =
+            controller.singleData['task_details'] ?? "details not found";
         return Container(
           height: double.maxFinite,
           width: double.maxFinite,
@@ -41,6 +45,7 @@ class ViewTask extends StatelessWidget {
                 ),
                 IconButton(
                     padding: EdgeInsets.zero,
+                    constraints: BoxConstraints(),
                     onPressed: () {
                       Get.back();
                     },
@@ -54,14 +59,15 @@ class ViewTask extends StatelessWidget {
                   TextFieldWidget(
                     readOnly: true,
                     textController: nameController,
-                    hintText: '${controller.singleData['task_name']}',
+                    hintText: 'Task Name',
                   ),
                   const SizedBox(
                     height: 20,
                   ),
                   TextFieldWidget(
+                    readOnly: true,
                     textController: detailController,
-                    hintText: '${controller.singleData['task_details']}',
+                    hintText: 'Task Details',
                     borderRadius: 15,
                     maxLine: 3,
                   ),

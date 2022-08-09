@@ -65,6 +65,8 @@ class EditTask extends StatelessWidget {
                     height: 60,
                   ),
                   IconButton(
+                    padding: EdgeInsets.zero,
+                    constraints: BoxConstraints(),
                     onPressed: () {
                       Get.back();
                     },
@@ -94,9 +96,11 @@ class EditTask extends StatelessWidget {
                   GestureDetector(
                     onTap: () {
                       if (_dataValidation()) {
-                        Get.find<DataController>().postData(
+                        Get.find<DataController>().updateData(
                             nameController.text.trim(),
-                            detailController.text.trim());
+                            detailController.text.trim(),
+                            controller.singleData['id']);
+
                         Get.to(() => AllTask(),
                             transition: Transition.circularReveal);
                       }
