@@ -11,7 +11,7 @@ class ViewTask extends StatelessWidget {
   const ViewTask({Key? key, required this.id}) : super(key: key);
 
   _loadSingleTask() async {
-    await Get.find<DataController>().getSingleData(id.toString());
+    await Get.find<DataController>().getSingleData(id);
   }
 
   @override

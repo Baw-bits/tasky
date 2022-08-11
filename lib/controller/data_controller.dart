@@ -19,24 +19,27 @@ class DataController extends GetxController {
     if (response.statusCode == 200) {
       _myData = response.body;
       print("we got body");
-      update();
     } else {
       print('We did not get the body');
     }
+    update();
+    _isLoading = false;
   }
 
-  Future<void> getSingleData(String id) async {
+  Future<void> getSingleData(int id) async {
     _isLoading = true;
-    Response response = await service.getData('${AppConstants.GET_TASK}' '$id');
+    Response response =
+        await service.getData('${AppConstants.GET_TASK}' '?id=$id');
     if (response.statusCode == 200) {
       if (kDebugMode) {
         print('we got the single data' + jsonEncode(response.body));
         _singleData = response.body;
       }
-      update();
     } else {
       print('he no work');
     }
+    update();
+    _isLoading = false;
   }
 
   Future<void> postData(String task, String taskDetail) async {
@@ -44,23 +47,42 @@ class DataController extends GetxController {
     Response response = await service.postData(AppConstants.POST_TASK,
         {"task_name": task, "task_details": taskDetail});
     if (response.statusCode == 200) {
-      update();
       print('Post Successfully');
     } else {
       print('nooooo');
     }
+    update();
+    _isLoading = false;
   }
 
   Future<void> updateData(String task, String taskDetail, int id) async {
     _isLoading = true;
     Response response = await service.updateData(
-        '${AppConstants.UPDATE_TASK}' '$id',
+        '${AppConstants.UPDATE_TASK}' '?id=$id',
         {"task_name": task, "task_details": taskDetail});
     if (response.statusCode == 200) {
-      update();
       print('Post Successfully');
     } else {
-      print('nooooo');
+      print('Post failed');
     }
+    update();
+    _isLoading = false;
+  }
+
+  Future<void> deleteData(int id) async {
+    _isLoading = true;
+    update();
+    Response response = await service.deleteData(
+      '${AppConstants.DELETE_TASK}' '?id=$id',
+    );
+    if (response.statusCode == 200) {
+      print('Delete Successfully');
+    } else {
+      print('Delete failed');
+    }
+    await Future.delayed(Duration(seconds: 1), () {
+      _isLoading = false;
+      update();
+    });
   }
 }

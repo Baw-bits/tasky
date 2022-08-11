@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tasky/controller/data_controller.dart';
+import 'package:tasky/routes/route.dart';
 import 'package:tasky/screens/add_task.dart';
 import 'package:tasky/screens/all_task.dart';
 import 'package:tasky/screens/home_screen.dart';
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomeScreen(),
+      initialRoute: RoutesClass.getHomeRoute(),
+      getPages: RoutesClass.routes,
     );
   }
 }

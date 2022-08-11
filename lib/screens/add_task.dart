@@ -7,6 +7,7 @@ import 'package:tasky/widgets/button_widget.dart';
 import 'package:tasky/widgets/error_warning_ms.dart';
 import 'package:tasky/widgets/textfield_widget.dart';
 import 'package:get/get.dart';
+import 'package:tasky/routes/route.dart';
 
 class AddTask extends StatelessWidget {
   const AddTask({Key? key}) : super(key: key);
@@ -55,6 +56,8 @@ class AddTask extends StatelessWidget {
                   height: 60,
                 ),
                 IconButton(
+                  padding: EdgeInsets.zero,
+                  constraints: BoxConstraints(),
                   onPressed: () {
                     Get.back();
                   },
@@ -87,8 +90,7 @@ class AddTask extends StatelessWidget {
                       Get.find<DataController>().postData(
                           nameController.text.trim(),
                           detailController.text.trim());
-                      Get.to(() => AllTask(),
-                          transition: Transition.circularReveal);
+                      Get.offNamed(RoutesClass.getViewAllTaskRoute());
                     }
                   },
                   child: ButtonWidget(

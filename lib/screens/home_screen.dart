@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tasky/routes/route.dart';
 import 'package:tasky/screens/add_task.dart';
 import 'package:tasky/screens/all_task.dart';
 import 'package:tasky/utils/colors/app_colors.dart';
@@ -47,9 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             InkWell(
               onTap: () {
-                Get.to(() => AddTask(),
-                    transition: Transition.fade,
-                    duration: Duration(milliseconds: 500));
+                Get.toNamed(RoutesClass.getAddTaskRoute());
               },
               child: ButtonWidget(
                   textColor: Colors.white,
@@ -61,9 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             InkWell(
               onTap: () {
-                Get.to(() => AllTask(),
-                    transition: Transition.fade,
-                    duration: Duration(seconds: 1));
+                Get.toNamed(RoutesClass.getViewAllTaskRoute());
               },
               child: ButtonWidget(
                   textColor: AppColors.smallTextColor,

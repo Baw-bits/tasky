@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tasky/controller/data_controller.dart';
+import 'package:tasky/routes/route.dart';
 import 'package:tasky/screens/all_task.dart';
 import 'package:tasky/utils/colors/app_colors.dart';
 import 'package:tasky/widgets/button_widget.dart';
@@ -12,7 +13,7 @@ class EditTask extends StatelessWidget {
   final int id;
   const EditTask({Key? key, required this.id}) : super(key: key);
   _loadingSingleTask() async {
-    await Get.find<DataController>().getSingleData(id.toString());
+    await Get.find<DataController>().getSingleData(id);
   }
 
   @override
@@ -99,16 +100,15 @@ class EditTask extends StatelessWidget {
                         Get.find<DataController>().updateData(
                             nameController.text.trim(),
                             detailController.text.trim(),
-                            controller.singleData['id']);
+                            int.parse(controller.singleData['id']));
 
-                        Get.to(() => AllTask(),
-                            transition: Transition.circularReveal);
+                        Get.offNamed(RoutesClass.getViewAllTaskRoute());
                       }
                     },
                     child: ButtonWidget(
                         textColor: Colors.white,
                         backgroundColor: AppColors.mainColor,
-                        text: 'Add'),
+                        text: 'Update'),
                   )
                 ],
               ),
