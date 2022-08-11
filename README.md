@@ -20,3 +20,11 @@ Deleting a task is possible by swipping left and swipping right to view or edit.
 
 # View all Task Page
 ![view](https://user-images.githubusercontent.com/67690156/182707175-dbc28cec-616f-4b69-a33e-613707710ce4.JPG)
+# One hand swipe left to Delete
+![1660220653585](https://user-images.githubusercontent.com/67690156/184132949-c97817dc-9612-4c28-87a9-f0f4e660820d.jpg)
+# Processing delete
+![1660220653560](https://user-images.githubusercontent.com/67690156/184132981-5114cdc4-4ae1-4f21-821c-1eeb02b960d9.jpg)
+# One hand swipe right for edit/view option
+![1660220653533](https://user-images.githubusercontent.com/67690156/184133045-9d25b38f-4791-41a7-aa1c-3afa5e636278.jpg)
+# Pop-up option
+![1660220653499](https://user-images.githubusercontent.com/67690156/184133070-74a6f6d1-b81f-4a61-86e4-ffb665a30518.jpg)
